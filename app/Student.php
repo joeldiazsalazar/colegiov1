@@ -1,0 +1,32 @@
+<?php
+
+namespace App;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+
+class Student extends Model
+{
+	use Notifiable;
+    
+
+    protected $fillable = [
+        'nombres', 'apellidoPaterno', 'apellidoMaterno','email','dni','sexo','fecha_nacimiento','direccion','distrito','departamento'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+       'remember_token',
+    ];
+
+    public function user(){
+        
+        return $this->hasMany(User::class);
+    }
+
+    
+
+}
