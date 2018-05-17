@@ -16,14 +16,13 @@
                 <div class="row">
                     <div class="col-sm-12 p-0">
                         <div class="main-header">
-                            <h4>General Elements</h4>
+                            <h4>Control de Roles</h4>
                             <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="icofont icofont-home"></i></a>
+                                <li class="breadcrumb-item"><a href="{{ route('cpanel')}}"><i class="icofont icofont-home"></i></a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Forms</a>
+                                <li class="breadcrumb-item"><a href="{{ route('roles.create')}}">Agregar Rol</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="general-elements-bootstrap.html">General Elements</a>
-                                </li>
+                                
                             </ol>
                         </div>
                     </div>
@@ -32,7 +31,7 @@
                     <!-- Form Control starts -->
                     <div class="col-lg-6">
                         <div class="card">
-                            <div class="card-header"><h5 class="card-header-text">Input Types</h5>
+                            <div class="card-header"><h5 class="card-header-text">Registro de Roles</h5>
                                 <div class="f-right">
                                     <a href="" data-toggle="modal" data-target="#input-type-Modal"><i class="icofont icofont-code-alt"></i></a>
                                 </div>
@@ -44,22 +43,22 @@
     {!! csrf_field() !!}
 
 <div class="form-group">
-    <label for="exampleInputEmail1" class="form-control-label">Nombre</label>
+    <label for="name" class="form-control-label">Nombre</label>
     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Rol" name="name" value="{{ old('name')}}">
 
     {!! $errors->first('name','<span class=error>:message</span>')!!}
 </div>
 
 <div class="form-group">
-    <label for="exampleInputEmail1" class="form-control-label">Email</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Display name" name="display_name" value="{{ old('display_name')}}">
+    <label for="display_name" class="form-control-label">Nombre a mostrar</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre a mostrar" name="display_name" value="{{ old('display_name')}}">
 
     {!! $errors->first('display_name','<span class=error>:message</span>')!!}
 </div>
  
  
 <div class="form-group">
-    <label for="exampleInputPassword1" class="form-control-label">Description</label>
+    <label for="description" class="form-control-label">Description</label>
         <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Description"  name="description" value="{{ old('description')}}">
 
         {!! $errors->first('description','<span class=error>:message</span>')!!}
@@ -78,5 +77,6 @@
 
 
 @endif
-<hr>
+
+
 @stop

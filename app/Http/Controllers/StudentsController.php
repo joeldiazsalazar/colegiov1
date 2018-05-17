@@ -5,14 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Student;
+use App\Role;
 
 class StudentsController extends Controller
 {
-    
+
 
     public function index()
     {
-        //
+
+
+        $students = Student::all();
+
+        return view('student.index',compact('students'));
     }
 
     /**
@@ -22,7 +27,8 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        return  view('student.create');
+        $roles = Role::all(); 
+        return  view('student.create',compact('roles'));
     }
 
     /**
@@ -34,6 +40,10 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
         Student::create($request->all());
+        User::create($request->all());
+
+        // alert()->success('Rol Creado')->persistent("Cerrar");
+        alert()->success('<a href="/students/create/">Desea agregar otro alumno?</a>')->html()->persistent("No, Gracias");
 
         // Redireccionar mensaje
         return back()->with('info','Alumno Agregado');   
@@ -60,7 +70,11 @@ class StudentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $students = Student::findOrFail($id);
+
+        
+
+        return view('student.edit',compact('students'));
     }
 
     /**
@@ -72,7 +86,14 @@ class StudentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $students = Student::findOrFail($id);
+
+        $students->update($request->all());
+
+        
+        alert()->success('Alumno actualizado satisfactoriamente', 'Success')->persistent("Close");
+
+        return back()->with('info','Rol actualizado');
     }
 
     /**
@@ -83,6 +104,10 @@ class StudentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $students = Student::findOrFail($id);
+        $students->delete();
+        //redireccionar
+        alert()->success('Rol eliminado satisfactoriamente', 'Éxito')->persistent("Close");
+        return back();
     }
 }

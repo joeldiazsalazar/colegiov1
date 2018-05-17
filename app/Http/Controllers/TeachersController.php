@@ -3,20 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Attorney;
+use App\Teacher;
 
-class AttorneysController extends Controller
+class TeachersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+      public function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('roles:admin',['except' => ['edit','update','destroy','create','index','store']]);
+    }
+
     public function index()
     {
 
-        $attorney = Attorney::all();
-        return view('attorney.index',compact('attorney'));
+        $teacher = Teacher::all()->where('estado','activo');  
+        return view('teacher.index',compact('teacher'));
+
     }
 
     /**
@@ -26,7 +29,7 @@ class AttorneysController extends Controller
      */
     public function create()
     {
-        return view('attorney.create');    
+        return view('teacher.create');    
     }
 
     /**
@@ -37,20 +40,16 @@ class AttorneysController extends Controller
      */
     public function store(Request $request)
     {
-        $attorney = Attorney::create($request->all());
+        $teacher = Teacher::create($request->all());
 
-        // Redireccionar mensaje
-
-        //Alert::success('Good job!')->persistent("Close");
-        //return back()->with('info','Rol Agregado');   
-
-        if ($attorney) {
-        // alert()->success('Rol Creado')->persistent("Cerrar");
-        alert()->success('<a href="/attorneys/create/">Desea agregar otro apoderado?</a>')->html()->persistent("No, Gracias");
-            
-        return redirect()->route('attorneys.index');
-
+        if ($request->hasFile('documentos')) {
+           $teacher->documentos = $request->file('documentos')->store('public');
         }
+
+        $teacher->save();
+
+        return redirect()->route('teachers.index');
+
     }
 
     /**
@@ -61,9 +60,7 @@ class AttorneysController extends Controller
      */
     public function show($id)
     {
-         $attorney = Attorney::all();
-
-        return view('attorney.show',compact('attorney'));
+        //
     }
 
     /**
@@ -74,10 +71,8 @@ class AttorneysController extends Controller
      */
     public function edit($id)
     {
-        $attorney = Attorney::findOrFail($id);
-        $att = Attorney::all();
-
-        return view('attorney.edit',compact('attorney','att'));
+        $teacher = Teacher::findOrFail($id);
+        return view('teacher.edit',compact('teacher'));
     }
 
     /**
@@ -89,12 +84,20 @@ class AttorneysController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $attorney = Attorney::findOrFail($id);
+      
 
-        $attorney->update($request->all());
+        $teacher = Teacher::findOrFail($id);
+
+        // if ($request->hasFile('documentos')) {
+
+        //     $teacher->documentos = $request->file('documentos')->store('public');
+        // }
+        $teacher->documentos = $request->file('documentos')->store('public');
+
+        $teacher->update($request->only('nombres'));
 
         // alert()->success('Category deleted successfully', 'Success')->persistent("Close");
-        return back()->with('info','Apoderado actualizado');
+        return back()->with('info','Rol actualizado');
     }
 
     /**
@@ -105,10 +108,11 @@ class AttorneysController extends Controller
      */
     public function destroy($id)
     {
-        $attorney = Attorney::findOrFail($id);
-        $attorney->delete();
+        $teacher = Teacher::findOrFail($id);
+        $teacher->estado='inactivo';
+        $teacher->update();
         //redireccionar
-        alert()->success('Apoderado eliminado satisfactoriamente', 'Éxito')->persistent("Close");
+        alert()->success('Rol eliminado satisfactoriamente', 'Éxito')->persistent("Close");
         return back();
     }
 }

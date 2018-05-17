@@ -33,7 +33,7 @@
                             </div>
 
 <div class="card-block">
-<form method="POST" action=" {{ route('students.store')}} ">
+<form method="POST" action=" {{ route('teachers.store')}} " enctype="multipart/form-data">
 
     {!! csrf_field() !!}
 
@@ -59,14 +59,8 @@
         {!! $errors->first('apellidoMaterno','<span class=error>:message</span>')!!}
 </div>
  
-<div class="form-group col-md-3">
-    <label for="email" class="form-control-label">Email</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""  name="email" value="{{ old('email')}}">
 
-        {!! $errors->first('email','<span class=error>:message</span>')!!}
-</div>
- 
-<div class="form-group col-md-3">
+ <div class="form-group col-md-3">
     <label for="dni" class="form-control-label">dni</label>
         <input type="number" class="form-control" id="exampleInputPassword1" placeholder=""  name="dni" value="{{ old('dni')}}">
 
@@ -80,75 +74,48 @@
         {!! $errors->first('sexo','<span class=error>:message</span>')!!}
 </div>
 
+
 <div class="form-group col-md-3">
-    <label for="fecha_nacimiento" class="form-control-label">fecha_nacimiento</label>
+    <label for="correo" class="form-control-label">correo</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""  name="correo" value="{{ old('correo')}}">
+
+        {!! $errors->first('correo','<span class=error>:message</span>')!!}
+</div>
+
+<div class="form-group col-md-3">
+    <label for="estado" class="form-control-label">estado</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""  name="estado" value="{{ old('estado')}}">
+
+        {!! $errors->first('estado','<span class=error>:message</span>')!!}
+</div>
+
+
+<div class="form-group col-md-3">
+    <label for="profesion" class="form-control-label">profesion</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""  name="profesion" value="{{ old('profesion')}}">
+
+        {!! $errors->first('profesion','<span class=error>:message</span>')!!}
+</div>
+
+
+<div class="form-group col-md-5">
+
+    <label for="file" class="col-md-5 col-form-label form-control-label">Documentos</label>
+    <div class="col-md-9">
+        <label for="file" class="custom-file">
+            <input type="file" id="file" class="custom-file-input" name="documentos"  value="{{ old('documentos')}}">
+            <span class="custom-file-control"></span>
+        </label>
+        {!! $errors->first('documentos','<span class=error>:message</span>')!!}
+    </div>
+
+</div>
+
+
+
+<div class="col-md-12">
     
-        <input class="form-control" type="date" value="{{ old('fecha_nacimiento')}}" id="example-date-input" name="fecha_nacimiento">
-
-        {!! $errors->first('fecha_nacimiento','<span class=error>:message</span>')!!}
-    
-</div>
-
-<div class="form-group col-md-3">
-    <label for="direccion" class="form-control-label">direccion</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""  name="direccion" value="{{ old('direccion')}}">
-
-        {!! $errors->first('direccion','<span class=error>:message</span>')!!}
-</div>
-
-<div class="form-group col-md-6">
-    <label for="distrito" class="form-control-label">distrito</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""  name="distrito" value="{{ old('distrito')}}">
-
-        {!! $errors->first('distrito','<span class=error>:message</span>')!!}
-</div>
-
-<div class="form-group col-md-6">
-    <label for="departamento" class="form-control-label">departamento</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder=""  name="departamento" value="{{ old('departamento')}}">
-
-        {!! $errors->first('departamento','<span class=error>:message</span>')!!}
-</div>
-
-
-<div class="form-group col-md-3">
-    <label for="name" class="form-control-label">Nombre Usuario</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name" name="name" value="{{ old('name')}}">
-
-    {!! $errors->first('name','<span class=error>:message</span>')!!}
-</div>
-
-<div class="form-group col-md-3">
-    <label for="username" class="form-control-label">Username</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" name="username" value="{{ old('username')}}">
-
-    {!! $errors->first('username','<span class=error>:message</span>')!!}
-</div>
- 
- 
-<div class="form-group col-md-3">
-    <label for="exampleInputPassword1" class="form-control-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"  name="password" value="{{ old('password')}}">
-
-        {!! $errors->first('password','<span class=error>:message</span>')!!}
-</div>
- 
-
- 
-<div class="form-group col-md-3">
-    <label for="exampleSelect1" class="form-control-label">Seleccione Rol</label>
-        <select class="form-control" id="mibuscador" name="role_id"">
-           @foreach ($roles as $rol)
-            <option  value="{{ $rol->id }}">  {{ $rol->display_name }} </option>
-            @endforeach
-        </select>
-
-        {!! $errors->first('role_id','<span class=error>:message</span>')!!}
-</div>
-
-<div class="col-md-3">
-	
-	<input class="btn btn-success waves-effect waves-light m-r-30" type="submit" name="Enviar">
+    <input class="btn btn-success waves-effect waves-light m-r-30" type="submit" name="Enviar">
 </div>
 
 

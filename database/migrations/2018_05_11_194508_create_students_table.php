@@ -19,7 +19,7 @@ class CreateStudentsTable extends Migration
             $table->string('apellidoPaterno');
             $table->string('apellidoMaterno');
             $table->string('email')->unique(); // ESTE CAMPO COMPRAR CON EMAIL DE USUARIOS
-            $table->integer('dni')->unique();
+            $table->string('dni')->unique();
             $table->string('sexo');
             $table->date('fecha_nacimiento');
             $table->string('direccion');

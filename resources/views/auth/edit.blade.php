@@ -25,24 +25,47 @@
 	{!! $errors->first('name','<span class=error>:message</span>')!!}
 </label></p>
 
-<p><label for="email">
-	Email
-	<input class="form-control" type="text" name="email" value="{{ $user->email}}">
+<p><label for="username">
+	Username
+	<input class="form-control" type="text" name="username" value="{{ $user->username}}">
 
-	{!! $errors->first('email','<span class=error>:message</span>')!!}
+	{!! $errors->first('username','<span class=error>:message</span>')!!}
 </label></p>
 
+
+@if (auth()->check())
+
+@if (auth()->user()->hasRoles(['admin']))
 <div class="form-group">
-    <label for="exampleSelect1" class="form-control-label">Example Assignar Student</label>
-        <select class="form-control" id="exampleSelect1" name="student">
-           @foreach ($students as $student)
-            <option value="{{ $student->id }}"> {{ $student->email }} </option>
+    <label for="student" class="form-control-label">Example Assignar Student</label>
+        <select class="form-control" id="edit-asig" name="student">
+           
+        	<option value="">Seleccione categoria</option>
+           @foreach ($students as $id =>$email)
+          {{-- @foreach($user->student as $students) --}}
+           {{--  <option 
+
+            value="{{ $student->id }}" 
+            {{ $user->student->pluck('id')->contains($student->id) ? 'selected' : '' }}> 
+
+            {{ $student->email }} 
+
+        	</option> --}}
+
+
+			<option value="{{ $id }}"
+			{{ $user->student->pluck('id')->contains($id) ? 'selected="selected"' : '' }}>
+			{{ $email}}
+			</option>
+         
             @endforeach
         </select>
 
         {!! $errors->first('student','<span class=error>:message</span>')!!}
 </div>
 
+@endif
+@endif
 
 <input class="btn btn-primary" type="submit" name="Enviar">
 

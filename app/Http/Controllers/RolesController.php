@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Role;
+use Alert;
 class RolesController extends Controller
 {
     
@@ -42,10 +43,19 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        Role::create($request->all());
+        $rol = Role::create($request->all());
 
         // Redireccionar mensaje
-        return back()->with('info','Rol Agregado');   
+
+        //Alert::success('Good job!')->persistent("Close");
+        //return back()->with('info','Rol Agregado');   
+
+        if ($rol) {
+        // alert()->success('Rol Creado')->persistent("Cerrar");
+        alert()->success('<a href="/roles/create/">Desea agregar otro rol?</a>')->html()->persistent("No, Gracias");
+            
+        return redirect()->route('roles.index');
+        }
     }
 
     /**
@@ -71,6 +81,8 @@ class RolesController extends Controller
     {
         $roles = Role::findOrFail($id);
 
+        
+
         return view('roles.edit',compact('roles'));
     }
 
@@ -86,6 +98,8 @@ class RolesController extends Controller
         $roles = Role::findOrFail($id);
 
         $roles->update($request->all());
+
+        // alert()->success('Category deleted successfully', 'Success')->persistent("Close");
         return back()->with('info','Rol actualizado');
     }
 
@@ -100,6 +114,7 @@ class RolesController extends Controller
         $roles = Role::findOrFail($id);
         $roles->delete();
         //redireccionar
+        alert()->success('Rol eliminado satisfactoriamente', 'Éxito')->persistent("Close");
         return back();
     }
 }

@@ -38,6 +38,7 @@
                             </div>
 
 <div class="card-block">
+    
 <form method="POST" action=" {{ route('users.store')}} ">
 
     {!! csrf_field() !!}

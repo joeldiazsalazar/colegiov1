@@ -1,4 +1,4 @@
-    @extends('layouts.profile')
+    @extends('layouts.admin')
 
     @section('contenido')
 
@@ -106,7 +106,7 @@
                                                                       
                                                                     <tr>
                                                                         <th scope="row">Nombre</th>
-                                                                        <td>{{ $students->nombre}}</td>
+                                                                        <td>{{ $students->nombres}}</td>
                                                                     </tr>
                                                                     </tbody>
                                                                 </table>
@@ -118,7 +118,7 @@
                                                                     <tbody>
                                                                     <tr>
                                                                         <th scope="row">Email</th>
-                                                                        <td><a href="#!"> {{ $students->email}}</a></td>
+                                                                        <td><a href="#!"> {{ $students->dni}}</a></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th scope="row">Avatar</th>

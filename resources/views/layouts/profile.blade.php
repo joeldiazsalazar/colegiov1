@@ -15,7 +15,7 @@
      <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png')}}" type="image/x-icon">
      <link rel="icon" href="{{ asset('assets/images/favicon.ico')}}" type="image/x-icon">
 
- <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/icofont/css/icofont.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/icofont/css/icofont.css')}}">
 
     <!-- Font Awesome -->
     <link href="{{ asset('assets/css/font-awesome.min.css" rel="stylesheet')}}" type="text/css">

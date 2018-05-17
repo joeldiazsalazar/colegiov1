@@ -15,8 +15,10 @@
      <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png')}}" type="image/x-icon">
      <link rel="icon" href="{{ asset('assets/images/favicon.ico')}}" type="image/x-icon">
 
-     <!-- Google font-->
+      <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/icofont/css/icofont.css')}}">
 
+     <!-- Google font-->
+    <link href="{{ asset('assets/css/font-awesome.min.css" rel="stylesheet')}}" type="text/css">
 
      <!-- iconfont -->
      <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/icofont/css/icofont.css') }}">
@@ -26,6 +28,9 @@
 
      <!-- Required Fremwork -->
      <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}">
+
+     <!-- Date Picker css -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}" />
 
      <!-- Weather css -->
      <link href="{{ asset('assets/css/svg-weather.css')}}" rel="stylesheet">
@@ -41,6 +46,10 @@
 
      <!--color css-->
      <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/color/color-1.min.css')}}" id="color"/>
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
  </head>
 
@@ -129,13 +138,7 @@
                             </ul>
                         </li>
                         <!-- chat dropdown -->
-                        <li class="pc-rheader-submenu ">
-                            <a href="#!" class="drop icon-circle displayChatbox">
-                                <i class="icon-bubbles"></i>
-                                <span class="badge badge-danger header-badge blink">5</span>
-                            </a>
-
-                        </li>
+                        
                         <!-- window screen -->
                         <li class="pc-rheader-submenu">
                             <a href="#!" class="drop icon-circle" onclick="javascript:toggleFullScreen()">
@@ -246,7 +249,7 @@
             <section class="sidebar" id="sidebar-scroll">
                 
                 <div class="user-panel">
-                    <div class="f-left image"><img src="assets/images/avatar-1.png" alt="User Image" class="img-circle"></div>
+                    <div class="f-left image"><img src="{{ asset('assets/images/avatar-1.png')}}" alt="User Image" class="img-circle"></div>
                     <div class="f-left info">
                     	@guest
                             <li><a href="{{ route('login') }}">Login</a></li>
@@ -310,7 +313,6 @@
 
                     <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span>Roles</span><i class="icon-arrow-down"></i></a>
                         <ul class="treeview-menu">
-                            <li><a class="waves-effect waves-dark" href="{{ route('roles.create')}}"><i class="icon-arrow-right"></i> Agregar Rol </a></li>
                             <li><a class="waves-effect waves-dark" href="{{ route('roles.index')}}"><i class="icon-arrow-right"></i> Lista Roles </a></li>
 
                           
@@ -323,20 +325,41 @@
                         <ul class="treeview-menu">
 
                             
-                            <li class="{{ activeMenu('users/create')}}"><a class="waves-effect waves-dark" href="{{ route('users.create')}}"><i class="icon-arrow-right"></i> Agregar usuario</a></li>
+                            {{-- <li class="{{ activeMenu('users/create')}}"><a class="waves-effect waves-dark" href="{{ route('users.create')}}"><i class="icon-arrow-right"></i> Agregar usuario</a></li> --}}
                             <li class="{{ activeMenu('users/index')}}"><a class="waves-effect waves-dark" href="{{ route('users.index')}}"><i class="icon-arrow-right"></i> Lista Usuarios</a></li>
                             <li><a class="waves-effect waves-dark" href="label-badge.html"><i class="icon-arrow-right"></i>Reporte</a></li>                          
                         </ul>
                     </li>
-                     <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span>Pagos</span><i class="icon-arrow-down"></i></a>
+
+                     <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span>Alumnos</span><i class="icon-arrow-down"></i></a>
                         <ul class="treeview-menu">
-                            <li><a class="waves-effect waves-dark" href="accordion.html"><i class="icon-arrow-right"></i> Registrar TipoPago</a></li>
-                            <li><a class="waves-effect waves-dark" href="accordion.html"><i class="icon-arrow-right"></i> Registrar Pago</a></li>
-                            <li><a class="waves-effect waves-dark" href="accordion.html"><i class="icon-arrow-right"></i> Registrar Recibo</a></li>
+                            
+                            <li><a class="waves-effect waves-dark" href="{{ route('students.index')  }}"><i class="icon-arrow-right"></i>Lista Alumno</a></li>
+                        </ul>
+                    </li>
+
+                     <li class=" treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span>Docente</span><i class="icon-arrow-down"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a class="waves-effect waves-dark" href="{{ route('teachers.index')  }}"><i class="icon-arrow-right"></i>Lista docentes</a></li>
+                            <li><a class="waves-effect waves-dark" href="button.html"><i class="icon-arrow-right"></i>Registrar Cursos</a></li>
                           
                         </ul>
-                    </li>   
-                     
+                    </li>
+
+                     <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span>Apoderado</span><i class="icon-arrow-down"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a class="waves-effect waves-dark" href="{{ route('attorneys.index')}}"><i class="icon-arrow-right"></i> Lista apoderados</a></li>
+                          
+                        </ul>
+                    </li>
+                    <li class=" treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span>Horario</span><i class="icon-arrow-down"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a class="waves-effect waves-dark" href=""><i class="icon-arrow-right"></i>Registrar Nivel</a></li>
+                            <li><a class="waves-effect waves-dark" href="button.html"><i class="icon-arrow-right"></i>Registrar Horario</a></li>
+                          
+                        </ul>
+                    </li>               
+                        
                     <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span>Matricula</span><i class="icon-arrow-down"></i></a>
                         <ul class="treeview-menu">
                             <li><a class="waves-effect waves-dark" href="accordion.html"><i class="icon-arrow-right"></i> Registrar Matricula</a></li>
@@ -352,36 +375,19 @@
                         </ul>
                     </li>   
 
-                     <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span>Alumnos</span><i class="icon-arrow-down"></i></a>
+                     <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span>Pagos</span><i class="icon-arrow-down"></i></a>
                         <ul class="treeview-menu">
-                            <li><a class="waves-effect waves-dark" href=""><i class="icon-arrow-right"></i>Registrar Alumno</a></li>
-                            <li><a class="waves-effect waves-dark" href=""><i class="icon-arrow-right"></i>Lista Alumno</a></li>
-                        </ul>
-                    </li>
-
-                     <li class=" treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span>Docente</span><i class="icon-arrow-down"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a class="waves-effect waves-dark" href="{{ route('docente.view')}}"><i class="icon-arrow-right"></i>Buscar Docente</a></li>
-                            <li><a class="waves-effect waves-dark" href="button.html"><i class="icon-arrow-right"></i>Registrar Cursos</a></li>
+                            <li><a class="waves-effect waves-dark" href="accordion.html"><i class="icon-arrow-right"></i> Registrar TipoPago</a></li>
+                            <li><a class="waves-effect waves-dark" href="accordion.html"><i class="icon-arrow-right"></i> Registrar Pago</a></li>
+                            <li><a class="waves-effect waves-dark" href="accordion.html"><i class="icon-arrow-right"></i> Registrar Recibo</a></li>
                           
                         </ul>
-                    </li>
+                    </li>   
 
-                     <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span>Apoderado</span><i class="icon-arrow-down"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a class="waves-effect waves-dark" href="{{ route('apoderado.view')}}"><i class="icon-arrow-right"></i> Buscar Apoderado</a></li>
-                          
-                        </ul>
-                    </li>
+                    
 
 
-                    <li class=" treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span>Horario</span><i class="icon-arrow-down"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a class="waves-effect waves-dark" href="{{ route('docente.view')}}"><i class="icon-arrow-right"></i>Registrar Nivel</a></li>
-                            <li><a class="waves-effect waves-dark" href="button.html"><i class="icon-arrow-right"></i>Registrar Horario</a></li>
-                          
-                        </ul>
-                    </li>
+                    
 
 
                     @endif
@@ -479,238 +485,7 @@
             </section>
         </aside>
         <!-- Sidebar chat start -->
-        <div id="sidebar" class="p-fixed header-users showChat">
-            <div class="had-container">
-                <div class="card card_main header-users-main">
-                    <div class="card-content user-box">
-
-                        <div class="md-group-add-on p-20">
-                           <span class="md-add-on">
-                            <i class="icofont icofont-search-alt-2 chat-search"></i>
-                        </span>
-                        <div class="md-input-wrapper">
-                            <input type="text" class="md-form-control"  name="username" id="search-friends">
-                            <label>Search</label>
-                        </div>
-
-                    </div>
-                    <div class="media friendlist-main">
-
-                        <h6>Friend List</h6>
-
-                    </div>
-                    <div class="main-friend-list">
-                        <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-1.png" alt="Generic placeholder image">
-                                <div class="live-status bg-success"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Josephin Doe</div>
-                                <span>20min ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice"  data-toggle="tooltip" data-placement="left" title="Alice">
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-2.png" alt="Generic placeholder image">
-                                <div class="live-status bg-success"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Alice</div>
-                                <span>1 hour ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="7" data-status="offline" data-username="Michael Scofield" data-toggle="tooltip" data-placement="left" title="Michael Scofield">
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-3.png" alt="Generic placeholder image">
-                                <div class="live-status bg-danger"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Michael Scofield</div>
-                                <span>3 hours ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="5" data-status="online" data-username="Irina Shayk" data-toggle="tooltip" data-placement="left" title="Irina Shayk">
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-4.png" alt="Generic placeholder image">
-                                <div class="live-status bg-success"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Irina Shayk</div>
-                                <span>1 day ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="6" data-status="offline" data-username="Sara Tancredi" data-toggle="tooltip" data-placement="left" title="Sara Tancredi">
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-5.png" alt="Generic placeholder image">
-                                <div class="live-status bg-danger"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Sara Tancredi</div>
-                                <span>2 days ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-1.png" alt="Generic placeholder image">
-                                <div class="live-status bg-success"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Josephin Doe</div>
-                                <span>20min ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-2.png" alt="Generic placeholder image">
-                                <div class="live-status bg-success"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Alice</div>
-                                <span>1 hour ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-1.png" alt="Generic placeholder image">
-                                <div class="live-status bg-success"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Josephin Doe</div>
-                                <span>20min ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-2.png" alt="Generic placeholder image">
-                                <div class="live-status bg-success"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Alice</div>
-                                <span>1 hour ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip"  data-placement="left" title="Josephin Doe">
-
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-1.png" alt="Generic placeholder image">
-                                <div class="live-status bg-success"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Josephin Doe</div>
-                                <span>20min ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice"  data-toggle="tooltip" data-placement="left" title="Alice">
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-2.png" alt="Generic placeholder image">
-                                <div class="live-status bg-success"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Alice</div>
-                                <span>1 hour ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-1.png" alt="Generic placeholder image">
-                                <div class="live-status bg-success"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Josephin Doe</div>
-                                <span>20min ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-1.png" alt="Generic placeholder image">
-                                <div class="live-status bg-success"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Josephin Doe</div>
-                                <span>20min ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-1.png" alt="Generic placeholder image">
-                                <div class="live-status bg-success"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Josephin Doe</div>
-                                <span>20min ago</span>
-                            </div>
-                        </div>
-                        <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-
-                            <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-1.png" alt="Generic placeholder image">
-                                <div class="live-status bg-success"></div>
-                            </a>
-                            <div class="media-body">
-                                <div class="friend-header">Josephin Doe</div>
-                                <span>20min ago</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="showChat_inner">
-        <div class="media chat-inner-header">
-            <a class="back_chatBox">
-                <i class="icofont icofont-rounded-left"></i> Josephin Doe
-            </a>
-        </div>
-        <div class="media chat-messages">
-            <a class="media-left photo-table" href="#!">
-                <img class="media-object img-circle m-t-5" src="assets/images/avatar-1.png" alt="Generic placeholder image">
-                <div class="live-status bg-success"></div>
-            </a>
-            <div class="media-body chat-menu-content">
-                <div class="">
-                    <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
-                    <p class="chat-time">8:20 a.m.</p>
-                </div>
-            </div>
-        </div>
-        <div class="media chat-messages">
-            <div class="media-body chat-menu-reply">
-                <div class="">
-                    <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
-                    <p class="chat-time">8:20 a.m.</p>
-                </div>
-            </div>
-            <div class="media-right photo-table">
-                <a href="#!">
-                    <img class="media-object img-circle m-t-5" src="assets/images/avatar-2.png" alt="Generic placeholder image">
-                    <div class="live-status bg-success"></div>
-                </a>
-            </div>
-        </div>
-        <div class="media chat-reply-box">
-            <div class="md-input-wrapper">
-                <input type="text" class="md-form-control" id="inputEmail" name="inputEmail" >
-                <label>Share your thoughts</label>
-                <span class="highlight"></span>
-                <span class="bar"></span>  <button type="button" class="chat-send waves-effect waves-light">
-                <i class="icofont icofont-location-arrow f-20 "></i>
-            </button>
-
-            <button type="button" class="chat-send waves-effect waves-light">
-                <i class="icofont icofont-location-arrow f-20 "></i>
-            </button>
-        </div>
-
-    </div>
-</div>
+        
 <!-- Sidebar chat end-->
 <div class="content-wrapper">
 
@@ -724,14 +499,6 @@
 
      @yield('contenido')
 
-
-<!-- Main content ends -->
-<!-- Container-fluid ends -->
-<div class="fixed-button">
-    <a href="https://themeforest.net/item/able-pro-responsive-bootstrap-4-admin-template/19300403?ref=phoenixcoded" class="btn btn-md btn-primary">
-      <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
-  </a>
-</div>
 </div>
 </div>
 
@@ -739,16 +506,94 @@
 
 		
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+        
+{{-- 	<script type="text/javascript" src="https://unpkg.com/sweetalert2@7.20.3/dist/sweetalert2.all.js"></script> --}}
 
-		
+
 
       <script src="{{asset('assets/plugins/jquery/dist/jquery.min.js')}}"></script>
+
+      <script type="text/javascript">
+        $(document).ready(function () {
+            (function ($) {
+                $('#filtrar').keyup(function () {
+                    var rex = new RegExp($(this).val(), 'i');
+                    $('.buscar tr').hide();
+                    $('.buscar tr').filter(function () {
+                        return rex.test($(this).text());
+                    }).show();
+                })
+            }(jQuery));
+        });
+      </script>   
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+      <script type="text/javascript">
+    $(document).ready(function(){
+            $('#mibuscador').select2();
+
+    });
+</script>
+
+      <script type="text/javascript">
+        $(".delete-edition-btn").on("click", function(event){
+        event.preventDefault();
+
+        swal({
+            title: "Estás seguro?",
+            text: "No podrás recuperar este Rol !", type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B25",
+            confirmButtonText: "Si, eliminar esto!",
+            closeOnConfirm: false
+        },
+        function(){
+            // Use closest() to find the correct form in the DOM
+          $("form#deleteedition").submit();
+        });
+        });
+
+        $(".delete-student-btn").on("click", function(event){
+        event.preventDefault();
+
+        swal({
+            title: "Estás seguro?",
+            text: "No podrás recuperar este Alumno !", type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B25",
+            confirmButtonText: "Si, eliminar esto!",
+            closeOnConfirm: false
+        },
+        function(){
+            // Use closest() to find the correct form in the DOM
+          $("form#deleteestudent").submit();
+        });
+        });
+
+        
+   </script>
+
+@include('sweet::alert')
+
+
+
+
+
+
+
+
+
       <script src="{{asset('assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
       <script src="{{asset('assets/plugins/tether/dist/js/tether.min.js')}}"></script>
 
       <!-- Required Fremwork -->
       <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
 
+
+        
       <!-- waves effects.js -->
       <script src="{{asset('assets/plugins/Waves/waves.min.js')}}"></script>
 
@@ -763,17 +608,20 @@
       <script src="{{asset('assets/plugins/notification/js/bootstrap-growl.min.js')}}"></script>
 
       <!-- Rickshaw Chart js -->
-      <script src="{{asset('assets/plugins/d3/d3.js')}}"></script>
+     {{--  <script src="{{asset('assets/plugins/d3/d3.js')}}"></script>
       <script src="{{asset('assets/plugins/rickshaw/rickshaw.js')}}"></script>
 
-      <!-- Sparkline charts -->
+      <! Sparkline charts >
       <script src="{{asset('assets/plugins/jquery-sparkline/dist/jquery.sparkline.js')}}"></script>
-
+ --}}
       <!-- Counter js  -->
+
+            <!-- Multi Select js -->
+
       <script src="{{asset('assets/plugins/waypoints/jquery.waypoints.min.js')}}"></script>
       <script src="{{asset('assets/plugins/countdown/js/jquery.counterup.js')}}"></script>
 
-<!-- custom js -->
+        <!-- custom js -->
 
 
 
@@ -781,14 +629,14 @@
       <!-- custom js -->
       <script type="text/javascript">
         
-'use strict';
+        'use strict';
 
 // function removeloader(){
 //     $('.loader-bg').fadeOut('slow', function() {
 //         $('.loader-bg').remove();
 //     });
 // };
-$(document).ready(function() {
+    $(document).ready(function() {
 
     //sidebar dropdown open
     $(".designation").on('click', function() {
@@ -1072,8 +920,9 @@ $(document).ready(function() {
 
 
 
-    </script>
+        </script>
       <script type="text/javascript" src="{{asset('assets/pages/dashboard.js')}}"></script>
+      <script type="text/javascript" src="{{ asset('assets/pages/profile.js')}}"></script>
       <script type="text/javascript" src="{{asset('assets/pages/elements.js')}}"></script>
       <script src="{{asset('assets/js/menu.min.js')}}"></script>
 
@@ -1134,6 +983,13 @@ $(document).ready(function() {
 
 });
     </script>
+
+
+
+
+  
+
+
 </body>
 
 </html>

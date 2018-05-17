@@ -87,7 +87,7 @@ class UsersController extends Controller
 
         $this->authorize('edit',$user);
 
-        $students = Student::all();
+        $students = Student::pluck('email','id');
 
         return view('auth.edit',compact('user','students'));
 
@@ -103,16 +103,14 @@ class UsersController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
 
-        
+        $user = User::findOrFail($id);
 
-         $user = User::findOrFail($id);
+        $this->authorize('update',$user);
 
-         $this->authorize('update',$user);
 
         $user->update($request->all());
 
-        $user->student()->attach($request->student);
-
+        $user->student()->sync($request->student);
 
         return back()->with('info','usuario actualizado');
     }

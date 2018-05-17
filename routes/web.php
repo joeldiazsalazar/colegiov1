@@ -15,7 +15,7 @@
 // App\User::create([
 
 // 'name' => 'Joel Diaz',
-// 'email' => 'jdiaz@gmail.com',
+// 'username' => 'jdiazs',
 // 'password' => bcrypt('123456'),
 // 'role_id' => '1'
 
@@ -35,7 +35,14 @@
 
 		Route::get('/', function () {
 		    return view('auth.login');
+		})->name('/');
+
+		Route::get('redirect', function (){ 
+		    
+		    return redirect('/');
 		});
+
+		Route::get('tipo/{type}', 'SweetController@notification');
 
 
 		Route::get('cpanel', 'PanelController@index')->name('cpanel');
@@ -85,11 +92,47 @@
 		Route::delete('students/{id}',['as' => 'students.destroy','uses' => 'StudentsController@destroy']);
 
 		Route::put('students/{id}',['as' => 'students.update','uses' => 'StudentsController@update']);
+
+		// metodos para el apoderado
+
+		Route::get('attorneys',['as' => 'attorneys.index','uses' => 'AttorneysController@index']);
+
+		Route::post('attorneys',['as' => 'attorneys.store','uses' => 'AttorneysController@store']);
+
+		Route::get('attorneys/create',['as' => 'attorneys.create','uses' => 'AttorneysController@create']);
+
+		Route::get('attorneys/show/{id}',['as' => 'attorneys.show','uses' => 'AttorneysController@show']);
+
+		Route::get('attorneys/{id}/edit',['as' => 'attorneys.edit','uses' => 'AttorneysController@edit']);
+
+		Route::delete('attorneys/{id}',['as' => 'attorneys.destroy','uses' => 'AttorneysController@destroy']);
+
+		Route::put('attorneys/{id}',['as' => 'attorneys.update','uses' => 'AttorneysController@update']);
+
+		// metodos para el docente
+		
+		Route::get('teachers',['as' => 'teachers.index','uses' => 'TeachersController@index']);
+
+		Route::post('teachers',['as' => 'teachers.store','uses' => 'TeachersController@store']);
+
+		Route::get('teachers/create',['as' => 'teachers.create','uses' => 'TeachersController@create']);
+
+		Route::get('teachers/show/{id}',['as' => 'teachers.show','uses' => 'TeachersController@show']);
+
+		Route::get('teachers/{id}/edit',['as' => 'teachers.edit','uses' => 'TeachersController@edit']);
+
+		Route::delete('teachers/{id}',['as' => 'teachers.destroy','uses' => 'TeachersController@destroy']);
+
+		Route::put('teachers/{id}',['as' => 'teachers.update','uses' => 'TeachersController@update']);
+
+
+
+
 		
 
-		Route::get('docente', 'PagesController@docente')->name('docente.view');
+		// Route::get('docente', 'PagesController@docente')->name('docente.view');
 
-		Route::get('apoderado', 'PagesController@apoderado')->name('apoderado.view');
+		// Route::get('apoderado', 'PagesController@apoderado')->name('apoderado.view');
 
 		Auth::routes();
 

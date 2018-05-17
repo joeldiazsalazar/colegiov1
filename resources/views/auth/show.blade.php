@@ -117,7 +117,7 @@
                                                                     <tbody>
                                                                     <tr>
                                                                         <th scope="row">Email</th>
-                                                                        <td><a href="#!"> {{ $users->email}}</a></td>
+                                                                        <td><a href="#!"> {{ $users->username}}</a></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th scope="row">Avatar</th>
@@ -177,15 +177,15 @@
                                                                         <td>{{ $students->apellidoPaterno }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Birth Date</th>
+                                                                        <th scope="row">Apellido Materno</th>
                                                                         <td>{{ $students->apellidoMaterno }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Marital Status</th>
+                                                                        <th scope="row">Email</th>
                                                                         <td>{{ $students->email }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Location</th>
+                                                                        <th scope="row">Dni</th>
                                                                         <td>{{ $students->dni }}</td>
                                                                     </tr>
                                                                      
@@ -199,19 +199,19 @@
                                                                     <tbody>
                                                                    
                                                                     <tr>
-                                                                        <th scope="row">Email</th>
+                                                                        <th scope="row">Sexo</th>
                                                                         <td>{{ $students->sexo }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Mobile Number</th>
+                                                                        <th scope="row">Fecha nacimiento</th>
                                                                         <td>{{ $students->fecha_nacimiento }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Twitter</th>
+                                                                        <th scope="row">Distrito</th>
                                                                         <td>{{ $students->distrito }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="row">Skype</th>
+                                                                        <th scope="row">Departamento</th>
                                                                         <td>{{ $students->departamento }}</td>
                                                                     </tr>
                                                                 
